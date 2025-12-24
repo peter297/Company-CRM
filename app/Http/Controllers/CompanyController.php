@@ -17,11 +17,12 @@ class CompanyController extends Controller
      */
 
     use AuthorizesRequests;
+    
     public function index(Request $request)
     {
         //Check authorization
         // $this->authorize('viewAny', Company::class);
-
+        
         FacadesGate::authorize('viewAny', Company::class);
         // Start building the query
         $query = Company::with('assignedTo');
@@ -75,7 +76,7 @@ class CompanyController extends Controller
     {
         // Check authorization
         // $this->authorize('create', Company::class);
-
+        
         FacadesGate::authorize('create', Company::class);
 
         // Get all the users for the "Assign to Dropdown
@@ -112,7 +113,7 @@ class CompanyController extends Controller
            FacadesGate::authorize('view', $company);
 
         // Load relationships
-        // $company->load('assignedTo');
+        $company->load('assignedTo');
 
         return view('companies.show', compact('company'));
     }
@@ -128,7 +129,7 @@ class CompanyController extends Controller
 
         // Check if user can reassign companies
 
-        $canReassign = auth()->user()->can('reassign', Company::class);
+        $canReassign = in_array(auth()->user()->role, ['admin', 'manager']);
 
         // Get users for dropdown
 

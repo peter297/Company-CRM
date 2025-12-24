@@ -187,13 +187,13 @@
                                         
                                     @endcan
 
-                                    @can('update', $company)
+                                    {{-- @can('update', $company)
                                     <a href="{{ route('companies.edit', $company) }}"
                                    class="text-indigo-600 hover:text-indigo-900" >
                                    Edit
                                 </a>
                                         
-                                    @endcan
+                                    @endcan --}}
 
                                     @can('delete', $company)
                                     <form action="{{ route('companies.destroy', $company) }}"
