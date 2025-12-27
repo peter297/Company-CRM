@@ -17,11 +17,24 @@
                     </x-nav-link>
                 </div>
 
+            
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.*')">
                         {{ __('Companies') }}
                     </x-nav-link>
                 </div>
+
+                @can('viewAny', App\Models\User::class)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                        {{ __('Manage Users') }}
+                    </x-nav-link>
+                </div>
+
+                @endcan
+                
+                
+                
             </div>
 
             <!-- Settings Dropdown -->
